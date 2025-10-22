@@ -2,43 +2,31 @@ name: Build APK
 
 on:
   push:
-    branches: [ main, master ]
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      JAVA_HOME: /usr/lib/jvm/zulu-11-azure
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up JDK 11
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '11'
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-    - name: Download Android SDK
-      uses: android-actions/setup-android@v2
-      with:
-        api-level: 33
-        target: default
-        ndk: false
-        components: platform-tools,build-tools;33.0.2,platforms;android-33
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-    - name: Accept Android SDK licenses
-      run: yes | sdkmanager --licenses || true
+      - name: Build APK
+        run: ./gradlew assembleDebug
 
-    - name: Grant execute to gradlew
-      run: chmod +x ./gradlew
-
-    - name: Build Debug APK
-      run: ./gradlew assembleDebug --no-daemon
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: app-debug-apk
-        path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: momo-auto-reply-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
