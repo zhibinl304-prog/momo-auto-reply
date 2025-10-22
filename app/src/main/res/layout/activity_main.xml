@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <LinearLayout
+      android:orientation="vertical"
+      android:padding="16dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+          android:text="Momo Auto Reply (监听新招呼并自动回复) " android:textSize="18sp" />
+
+      <EditText
+          android:id="@+id/edit_target_package"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="目标包名 (例如 com.immomo.momo)"/>
+
+      <EditText
+          android:id="@+id/edit_message"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="招呼回复内容（会把这里的文字发出）"/>
+
+      <EditText
+          android:id="@+id/edit_interval"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="number"
+          android:hint="回复间隔（秒）" />
+
+      <Button
+          android:id="@+id/btn_save"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="保存设置" />
+
+      <Button
+          android:id="@+id/btn_accessibility"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="打开无障碍设置" />
+
+      <Button
+          android:id="@+id/btn_open_momo"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="打开陌陌（如果已安装）" />
+
+      <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="说明：本示例会尝试检测包含“招呼/打招呼/hi/hello/你好”等关键词的消息泡，识别为新的招呼并自动回复。仅供测试。" />
+  </LinearLayout>
+</ScrollView>
